@@ -9,4 +9,6 @@ Linear Regression is implemented using Gradient Descent
 
 
 
-#### Note: There's a folder named *Documentation* with some notes, handwritten by me, on the math behind this algorithms
+#### Note: 
+- There's a folder named *Documentation* with some notes, handwritten by me, on the math behind this algorithms
+- Breeze cheat sheet: https://github.com/scalanlp/breeze/wiki/Linear-Algebra-Cheat-Sheet

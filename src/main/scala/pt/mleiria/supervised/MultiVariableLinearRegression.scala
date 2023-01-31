@@ -118,19 +118,7 @@ class MultiVariableLinearRegression(x: DenseMatrix[Double], y: DenseVector[Doubl
 
   /**
    *
-   * @param alpha    Learning rate
-   * @param numIters umber of iterations to run gradient descent
-   * @return w: Updated value of parameter after running gradient descent
-   *         b: Updated value of parameter after running gradient descent
-   *         JHistory: History of cost values
-   */
-  def fit(alpha: Double, numIters: Int): (DenseVector[Double], Double, Array[Double]) = {
-    gradientDescent(DenseVector.zeros[Double](n), 0.0, alpha, numIters, computeGradient, computeCost)
-  }
-
-  /**
-   *
-   * @param wIn      Initial values for model parameters
+   * @param wIn      Initial values for model parameters (defaults to DENseVEctor of zeros)
    * @param bIn      Initial values for model parameters
    * @param alpha    Learning rate
    * @param numIters umber of iterations to run gradient descent
@@ -138,7 +126,7 @@ class MultiVariableLinearRegression(x: DenseMatrix[Double], y: DenseVector[Doubl
    *         b: Updated value of parameter after running gradient descent
    *         JHistory: History of cost values
    */
-  def fit(wIn: DenseVector[Double], bIn: Double, alpha: Double, numIters: Int):
+  def fit(bIn: Double, alpha: Double, numIters: Int, wIn: DenseVector[Double] = DenseVector.zeros[Double](n)):
   (DenseVector[Double], Double, Array[Double]) = {
 
     gradientDescent(wIn, bIn, alpha, numIters, computeGradient, computeCost)

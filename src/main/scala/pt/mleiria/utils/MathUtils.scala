@@ -1,6 +1,6 @@
-package utils
+package pt.mleiria.utils
 
-import breeze.linalg.DenseVector
+import breeze.linalg.{DenseMatrix, DenseVector}
 
 object MathUtils:
 
@@ -20,5 +20,6 @@ object MathUtils:
   def roundDoubleVector(v: DenseVector[Double]): DenseVector[Double] = {
     v.map(elem => roundDoubleScalar(elem))
   }
+
 
 
