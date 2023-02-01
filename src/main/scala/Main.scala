@@ -6,7 +6,10 @@ import scala.io.Source
 
 @main def hello: Unit =
   println("hello scala 3")
-  testBroadcast()
+  val dm = DenseMatrix((1.0, 2.0, 3.0), (4.0, 5.0, 6.0))
+  val dv = DenseVector(3.0, 4.0, 5.0)
+  val res = dm(0, ::) * dv + 4.0
+  println(res)
 
 
 

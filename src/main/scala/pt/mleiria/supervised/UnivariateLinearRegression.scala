@@ -100,7 +100,7 @@ class UnivariateLinearRegression(val x: Array[Double], val y: Array[Double]) {
         jHistory(counter) = costFunc(wNext, bNext)
         if counter % math.ceil(numIters / 10) == 0 then
           printf("| %-15s | %-30s ", s"Iteration: ${counter}", s"Cost: ${jHistory(counter)}")
-
+          println()
         loop(wNext, bNext, counter + 1)
       }
     }

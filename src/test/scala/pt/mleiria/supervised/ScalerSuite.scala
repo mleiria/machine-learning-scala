@@ -2,7 +2,7 @@ package pt.mleiria.supervised
 
 import breeze.linalg.DenseMatrix
 import pt.mleiria.preprocess.Scaler
-import pt.mleiria.utils.{IOUtils, MathUtils, MatrixUtils}
+import pt.mleiria.utils.{IOUtils, MatrixUtils, roundDoubleScalar}
 
 class ScalerSuite extends munit.FunSuite:
 
@@ -13,14 +13,14 @@ class ScalerSuite extends munit.FunSuite:
     //println(xTransformed)
     println(mean)
     println(stdev)
-    assert(MathUtils.roundDoubleScalar(mean(0)) == 1413.71)
-    assert(MathUtils.roundDoubleScalar(mean(1)) == 2.71)
-    assert(MathUtils.roundDoubleScalar(mean(2)) == 1.38)
-    assert(MathUtils.roundDoubleScalar(mean(3)) == 38.65)
+    assert(roundDoubleScalar(mean(0)) == 1413.71)
+    assert(roundDoubleScalar(mean(1)) == 2.71)
+    assert(roundDoubleScalar(mean(2)) == 1.38)
+    assert(roundDoubleScalar(mean(3)) == 38.65)
 
-    assert(MathUtils.roundDoubleScalar(stdev(0)) == 414.25)
-    assert(MathUtils.roundDoubleScalar(stdev(1)) == 0.66)
-    assert(MathUtils.roundDoubleScalar(stdev(2)) == 0.49)
-    assert(MathUtils.roundDoubleScalar(stdev(3)) == 25.91)
+    assert(roundDoubleScalar(stdev(0)) == 414.25)
+    assert(roundDoubleScalar(stdev(1)) == 0.66)
+    assert(roundDoubleScalar(stdev(2)) == 0.49)
+    assert(roundDoubleScalar(stdev(3)) == 25.91)
 
   }

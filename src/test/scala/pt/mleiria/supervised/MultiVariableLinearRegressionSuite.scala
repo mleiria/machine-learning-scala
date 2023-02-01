@@ -1,8 +1,9 @@
 package pt.mleiria.supervised
 
 import breeze.linalg.{DenseMatrix, DenseVector}
+import breeze.numerics.{abs, round}
 import pt.mleiria.preprocess.Scaler
-import pt.mleiria.utils.{IOUtils, MathUtils, MatrixUtils}
+import pt.mleiria.utils.{IOUtils, MatrixUtils, roundDoubleScalar, roundDoubleVector}
 import spire.implicits.eqOps
 
 class MultiVariableLinearRegressionSuite extends munit.FunSuite:
@@ -25,8 +26,8 @@ class MultiVariableLinearRegressionSuite extends munit.FunSuite:
 
     val (wFinal, bFinal, jHistory) = gd.fit(bIn, alpha, iterations, wIn)
 
-    val bFinalRounded = MathUtils.roundDoubleScalar(bFinal)
-    val wFinalRounded = MathUtils.roundDoubleVector(wFinal)
+    val bFinalRounded = roundDoubleScalar(bFinal)
+    val wFinalRounded = roundDoubleVector(wFinal)
 
     assert(bFinalRounded == 0.0)
 
@@ -37,7 +38,7 @@ class MultiVariableLinearRegressionSuite extends munit.FunSuite:
 
   }
 
-  test("gradientDescentWithScaler") {
+  test("gradientDescentWithScalerAndOneSample") {
     // Load the dataset from csv file
     val xy: DenseMatrix[Double] = IOUtils.readCsvFromResourcesToMatrix("data/houses.txt")
     // Split the data into xTrain and yTrain
@@ -49,11 +50,10 @@ class MultiVariableLinearRegressionSuite extends munit.FunSuite:
     val gd = MultiVariableLinearRegression.apply(xTrainNorm, yTrain)
     val (wNorm, bNorm, history) = gd.fit(bIn, alpha, iterations)
 
-    assert(MathUtils.roundDoubleScalar(wNorm(0)) == 111.17)
-    assert(MathUtils.roundDoubleScalar(wNorm(1)) == -21.58)
-    assert(MathUtils.roundDoubleScalar(wNorm(2)) == -32.83)
-    assert(MathUtils.roundDoubleScalar(wNorm(3)) == -37.97)
-    assert(MathUtils.roundDoubleScalar(bNorm) == 362.24)
+    val xHouse = DenseVector[Double](1200.0, 3.0, 1.0, 40.0)
+    val xHouseNorm = (xHouse - mean) / stdev
+    val xHousePredict = gd.predict(bNorm, wNorm, xHouseNorm)
+    assert(roundDoubleScalar(xHousePredict) == 318.94)
   }
 
 

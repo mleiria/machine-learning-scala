@@ -32,3 +32,12 @@ class BreezeSuite extends munit.FunSuite:
     println(res)
     assert(res == DenseMatrix((2.0, 3.0, 4.0), (5.0, 6.0, 7.0)))
   }
+
+  test("beeze.matrixRow.dotProduct.with.vector") {
+    val dm = DenseMatrix((1.0, 2.0, 3.0), (4.0, 5.0, 6.0))
+    val dv = DenseVector(3.0, 4.0, 5.0)
+    // Dot product between a matrix row (vector) and a vector 
+    val res = dm(0, ::) * dv 
+    println(res)
+    assert(clue(res) == clue(26.0))
+  }

@@ -122,14 +122,47 @@ class MultiVariableLinearRegression(x: DenseMatrix[Double], y: DenseVector[Doubl
    * @param bIn      Initial values for model parameters
    * @param alpha    Learning rate
    * @param numIters umber of iterations to run gradient descent
-   * @return w: Updated value of parameter after running gradient descent
-   *         b: Updated value of parameter after running gradient descent
+   * @return w: Updated value of parameter after running gradient descent <br>
+   *         b: Updated value of parameter after running gradient descent <br>
    *         JHistory: History of cost values
    */
   def fit(bIn: Double, alpha: Double, numIters: Int, wIn: DenseVector[Double] = DenseVector.zeros[Double](n)):
   (DenseVector[Double], Double, Array[Double]) = {
 
     gradientDescent(wIn, bIn, alpha, numIters, computeGradient, computeCost)
+  }
+
+  /**
+   *
+   * @param b The optimal parameter to perform linear regression (Double)
+   * @param w The optimal weight vector to eprform linear regression (DenseVector)
+   * @param x The matrix to calculate the predictions
+   * @return y The vector with the predictions for matrix nnput x
+   */
+  def predict(b: Double, w: DenseVector[Double], x: DenseMatrix[Double]): DenseVector[Double] = {
+
+    @tailrec
+    def loop(rowNum: Int, y: DenseVector[Double]): DenseVector[Double] = {
+      if (rowNum == m) {
+        y
+      } else {
+        y(rowNum) = x(rowNum, ::) * w + b
+        loop(rowNum + 1, y)
+      }
+    }
+
+    loop(0, DenseVector.zeros[Double](m))
+  }
+
+  /**
+   *
+   * @param b The optimal parameter to perform linear regression (Double)
+   * @param w The optimal weight vector to eprform linear regression (DenseVector)
+   * @param x The vector to calculate the predictions
+   * @return the y predicted
+   */
+  def predict(b: Double, w: DenseVector[Double], x: DenseVector[Double]): Double = {
+    (x dot w) + b
   }
 }
 
